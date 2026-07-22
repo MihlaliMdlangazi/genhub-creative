@@ -9,6 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TextRouteImport } from './routes/text'
+import { Route as ImageRouteImport } from './routes/image'
+import { Route as CodeRouteImport } from './routes/code'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiTtsRouteImport } from './routes/api/tts'
 import { Route as ApiSttRouteImport } from './routes/api/stt'
@@ -18,6 +21,21 @@ import { Route as ApiGenerateTextRouteImport } from './routes/api/generate-text'
 import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
 import { Route as ApiGenerateCodeRouteImport } from './routes/api/generate-code'
 
+const TextRoute = TextRouteImport.update({
+  id: '/text',
+  path: '/text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImageRoute = ImageRouteImport.update({
+  id: '/image',
+  path: '/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CodeRoute = CodeRouteImport.update({
+  id: '/code',
+  path: '/code',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -61,6 +79,9 @@ const ApiGenerateCodeRoute = ApiGenerateCodeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/code': typeof CodeRoute
+  '/image': typeof ImageRoute
+  '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/api/generate-text': typeof ApiGenerateTextRoute
@@ -71,6 +92,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/code': typeof CodeRoute
+  '/image': typeof ImageRoute
+  '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/api/generate-text': typeof ApiGenerateTextRoute
@@ -82,6 +106,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/code': typeof CodeRoute
+  '/image': typeof ImageRoute
+  '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/api/generate-text': typeof ApiGenerateTextRoute
@@ -94,6 +121,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/code'
+    | '/image'
+    | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
     | '/api/generate-text'
@@ -104,6 +134,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/code'
+    | '/image'
+    | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
     | '/api/generate-text'
@@ -114,6 +147,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/code'
+    | '/image'
+    | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
     | '/api/generate-text'
@@ -125,6 +161,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CodeRoute: typeof CodeRoute
+  ImageRoute: typeof ImageRoute
+  TextRoute: typeof TextRoute
   ApiGenerateCodeRoute: typeof ApiGenerateCodeRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
   ApiGenerateTextRoute: typeof ApiGenerateTextRoute
@@ -136,6 +175,27 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/text': {
+      id: '/text'
+      path: '/text'
+      fullPath: '/text'
+      preLoaderRoute: typeof TextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/image': {
+      id: '/image'
+      path: '/image'
+      fullPath: '/image'
+      preLoaderRoute: typeof ImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/code': {
+      id: '/code'
+      path: '/code'
+      fullPath: '/code'
+      preLoaderRoute: typeof CodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -197,6 +257,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CodeRoute: CodeRoute,
+  ImageRoute: ImageRoute,
+  TextRoute: TextRoute,
   ApiGenerateCodeRoute: ApiGenerateCodeRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,
   ApiGenerateTextRoute: ApiGenerateTextRoute,
