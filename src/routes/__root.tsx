@@ -79,21 +79,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CreatorFlow AI — Create text, code, images, and audio in one workspace" },
+      { title: "Dashboard — CreatorFlow AI" },
       {
         name: "description",
         content:
-          "CreatorFlow AI is a premium AI content studio for writers, developers, designers, and creators. Generate text, code, images, and audio in a single professional workspace.",
+          "Your AI-powered creator studio. Generate text, code, images, and audio in one professional workspace.",
       },
       { name: "author", content: "CreatorFlow AI" },
-      { property: "og:title", content: "CreatorFlow AI — The AI-Powered Creator Studio" },
+      { property: "og:title", content: "Dashboard — CreatorFlow AI" },
       {
         property: "og:description",
         content:
-          "One professional workspace to write, code, design, and narrate with AI. No accounts required.",
+          "Your AI-powered creator studio. Generate text, code, images, and audio in one professional workspace.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Dashboard — CreatorFlow AI" },
+      { name: "twitter:description", content: "Your AI-powered creator studio. Generate text, code, images, and audio in one professional workspace." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/880744a3-6950-49fd-838d-7c6f51ee2361/id-preview-d8907876--63b61633-88c7-45f9-9bf8-c843b850129f.lovable.app-1784699307447.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/880744a3-6950-49fd-838d-7c6f51ee2361/id-preview-d8907876--63b61633-88c7-45f9-9bf8-c843b850129f.lovable.app-1784699307447.png" },
     ],
     links: [
       {

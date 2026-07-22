@@ -14,10 +14,10 @@ export const Route = createFileRoute("/")({
         content:
           "Your AI-powered creator studio. Generate text, code, images, and audio in one professional workspace.",
       },
-      { property: "og:title", content: "CreatorFlow AI Dashboard" },
+      { property: "og:title", content: "Dashboard — CreatorFlow AI" },
       {
         property: "og:description",
-        content: "Text, code, image, and audio generators in one workspace.",
+        content: "Your AI-powered creator studio. Generate text, code, images, and audio in one professional workspace.",
       },
     ],
   }),
