@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiTtsRouteImport } from './routes/api/tts'
+import { Route as ApiSttRouteImport } from './routes/api/stt'
+import { Route as ApiRefreshPromptsRouteImport } from './routes/api/refresh-prompts'
+import { Route as ApiImprovePromptRouteImport } from './routes/api/improve-prompt'
+import { Route as ApiGenerateTextRouteImport } from './routes/api/generate-text'
+import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
+import { Route as ApiGenerateCodeRouteImport } from './routes/api/generate-code'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiTtsRoute = ApiTtsRouteImport.update({
+  id: '/api/tts',
+  path: '/api/tts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSttRoute = ApiSttRouteImport.update({
+  id: '/api/stt',
+  path: '/api/stt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiRefreshPromptsRoute = ApiRefreshPromptsRouteImport.update({
+  id: '/api/refresh-prompts',
+  path: '/api/refresh-prompts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiImprovePromptRoute = ApiImprovePromptRouteImport.update({
+  id: '/api/improve-prompt',
+  path: '/api/improve-prompt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateTextRoute = ApiGenerateTextRouteImport.update({
+  id: '/api/generate-text',
+  path: '/api/generate-text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateImageRoute = ApiGenerateImageRouteImport.update({
+  id: '/api/generate-image',
+  path: '/api/generate-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateCodeRoute = ApiGenerateCodeRouteImport.update({
+  id: '/api/generate-code',
+  path: '/api/generate-code',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/generate-code': typeof ApiGenerateCodeRoute
+  '/api/generate-image': typeof ApiGenerateImageRoute
+  '/api/generate-text': typeof ApiGenerateTextRoute
+  '/api/improve-prompt': typeof ApiImprovePromptRoute
+  '/api/refresh-prompts': typeof ApiRefreshPromptsRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/generate-code': typeof ApiGenerateCodeRoute
+  '/api/generate-image': typeof ApiGenerateImageRoute
+  '/api/generate-text': typeof ApiGenerateTextRoute
+  '/api/improve-prompt': typeof ApiImprovePromptRoute
+  '/api/refresh-prompts': typeof ApiRefreshPromptsRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/generate-code': typeof ApiGenerateCodeRoute
+  '/api/generate-image': typeof ApiGenerateImageRoute
+  '/api/generate-text': typeof ApiGenerateTextRoute
+  '/api/improve-prompt': typeof ApiImprovePromptRoute
+  '/api/refresh-prompts': typeof ApiRefreshPromptsRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/generate-code'
+    | '/api/generate-image'
+    | '/api/generate-text'
+    | '/api/improve-prompt'
+    | '/api/refresh-prompts'
+    | '/api/stt'
+    | '/api/tts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/generate-code'
+    | '/api/generate-image'
+    | '/api/generate-text'
+    | '/api/improve-prompt'
+    | '/api/refresh-prompts'
+    | '/api/stt'
+    | '/api/tts'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/generate-code'
+    | '/api/generate-image'
+    | '/api/generate-text'
+    | '/api/improve-prompt'
+    | '/api/refresh-prompts'
+    | '/api/stt'
+    | '/api/tts'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiGenerateCodeRoute: typeof ApiGenerateCodeRoute
+  ApiGenerateImageRoute: typeof ApiGenerateImageRoute
+  ApiGenerateTextRoute: typeof ApiGenerateTextRoute
+  ApiImprovePromptRoute: typeof ApiImprovePromptRoute
+  ApiRefreshPromptsRoute: typeof ApiRefreshPromptsRoute
+  ApiSttRoute: typeof ApiSttRoute
+  ApiTtsRoute: typeof ApiTtsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/tts': {
+      id: '/api/tts'
+      path: '/api/tts'
+      fullPath: '/api/tts'
+      preLoaderRoute: typeof ApiTtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stt': {
+      id: '/api/stt'
+      path: '/api/stt'
+      fullPath: '/api/stt'
+      preLoaderRoute: typeof ApiSttRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/refresh-prompts': {
+      id: '/api/refresh-prompts'
+      path: '/api/refresh-prompts'
+      fullPath: '/api/refresh-prompts'
+      preLoaderRoute: typeof ApiRefreshPromptsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/improve-prompt': {
+      id: '/api/improve-prompt'
+      path: '/api/improve-prompt'
+      fullPath: '/api/improve-prompt'
+      preLoaderRoute: typeof ApiImprovePromptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-text': {
+      id: '/api/generate-text'
+      path: '/api/generate-text'
+      fullPath: '/api/generate-text'
+      preLoaderRoute: typeof ApiGenerateTextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-image': {
+      id: '/api/generate-image'
+      path: '/api/generate-image'
+      fullPath: '/api/generate-image'
+      preLoaderRoute: typeof ApiGenerateImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-code': {
+      id: '/api/generate-code'
+      path: '/api/generate-code'
+      fullPath: '/api/generate-code'
+      preLoaderRoute: typeof ApiGenerateCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiGenerateCodeRoute: ApiGenerateCodeRoute,
+  ApiGenerateImageRoute: ApiGenerateImageRoute,
+  ApiGenerateTextRoute: ApiGenerateTextRoute,
+  ApiImprovePromptRoute: ApiImprovePromptRoute,
+  ApiRefreshPromptsRoute: ApiRefreshPromptsRoute,
+  ApiSttRoute: ApiSttRoute,
+  ApiTtsRoute: ApiTtsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
