@@ -10,8 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TextRouteImport } from './routes/text'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as LibraryRouteImport } from './routes/library'
 import { Route as ImageRouteImport } from './routes/image'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as HelpRouteImport } from './routes/help'
 import { Route as CodeRouteImport } from './routes/code'
+import { Route as AudioRouteImport } from './routes/audio'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiTtsRouteImport } from './routes/api/tts'
 import { Route as ApiSttRouteImport } from './routes/api/stt'
@@ -26,14 +33,49 @@ const TextRoute = TextRouteImport.update({
   path: '/text',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryRoute = LibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImageRoute = ImageRouteImport.update({
   id: '/image',
   path: '/image',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CodeRoute = CodeRouteImport.update({
   id: '/code',
   path: '/code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AudioRoute = AudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -79,8 +121,15 @@ const ApiGenerateCodeRoute = ApiGenerateCodeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/audio': typeof AudioRoute
   '/code': typeof CodeRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
   '/image': typeof ImageRoute
+  '/library': typeof LibraryRoute
+  '/projects': typeof ProjectsRoute
+  '/settings': typeof SettingsRoute
   '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
@@ -92,8 +141,15 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/audio': typeof AudioRoute
   '/code': typeof CodeRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
   '/image': typeof ImageRoute
+  '/library': typeof LibraryRoute
+  '/projects': typeof ProjectsRoute
+  '/settings': typeof SettingsRoute
   '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
@@ -106,8 +162,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/audio': typeof AudioRoute
   '/code': typeof CodeRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
   '/image': typeof ImageRoute
+  '/library': typeof LibraryRoute
+  '/projects': typeof ProjectsRoute
+  '/settings': typeof SettingsRoute
   '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
@@ -121,8 +184,15 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/audio'
     | '/code'
+    | '/help'
+    | '/history'
     | '/image'
+    | '/library'
+    | '/projects'
+    | '/settings'
     | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
@@ -134,8 +204,15 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/audio'
     | '/code'
+    | '/help'
+    | '/history'
     | '/image'
+    | '/library'
+    | '/projects'
+    | '/settings'
     | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
@@ -147,8 +224,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/audio'
     | '/code'
+    | '/help'
+    | '/history'
     | '/image'
+    | '/library'
+    | '/projects'
+    | '/settings'
     | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
@@ -161,8 +245,15 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AudioRoute: typeof AudioRoute
   CodeRoute: typeof CodeRoute
+  HelpRoute: typeof HelpRoute
+  HistoryRoute: typeof HistoryRoute
   ImageRoute: typeof ImageRoute
+  LibraryRoute: typeof LibraryRoute
+  ProjectsRoute: typeof ProjectsRoute
+  SettingsRoute: typeof SettingsRoute
   TextRoute: typeof TextRoute
   ApiGenerateCodeRoute: typeof ApiGenerateCodeRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
@@ -182,6 +273,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TextRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/image': {
       id: '/image'
       path: '/image'
@@ -189,11 +301,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/code': {
       id: '/code'
       path: '/code'
       fullPath: '/code'
       preLoaderRoute: typeof CodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audio': {
+      id: '/audio'
+      path: '/audio'
+      fullPath: '/audio'
+      preLoaderRoute: typeof AudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -257,8 +397,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AudioRoute: AudioRoute,
   CodeRoute: CodeRoute,
+  HelpRoute: HelpRoute,
+  HistoryRoute: HistoryRoute,
   ImageRoute: ImageRoute,
+  LibraryRoute: LibraryRoute,
+  ProjectsRoute: ProjectsRoute,
+  SettingsRoute: SettingsRoute,
   TextRoute: TextRoute,
   ApiGenerateCodeRoute: ApiGenerateCodeRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,
