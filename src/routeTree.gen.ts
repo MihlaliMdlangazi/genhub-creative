@@ -9,38 +9,333 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TextRouteImport } from './routes/text'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as LibraryRouteImport } from './routes/library'
+import { Route as ImageRouteImport } from './routes/image'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as CodeRouteImport } from './routes/code'
+import { Route as AudioRouteImport } from './routes/audio'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiTtsRouteImport } from './routes/api/tts'
+import { Route as ApiSttRouteImport } from './routes/api/stt'
+import { Route as ApiRefreshPromptsRouteImport } from './routes/api/refresh-prompts'
+import { Route as ApiImprovePromptRouteImport } from './routes/api/improve-prompt'
+import { Route as ApiGenerateTextRouteImport } from './routes/api/generate-text'
+import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
+import { Route as ApiGenerateCodeRouteImport } from './routes/api/generate-code'
 
+const TextRoute = TextRouteImport.update({
+  id: '/text',
+  path: '/text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryRoute = LibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImageRoute = ImageRouteImport.update({
+  id: '/image',
+  path: '/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CodeRoute = CodeRouteImport.update({
+  id: '/code',
+  path: '/code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AudioRoute = AudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiTtsRoute = ApiTtsRouteImport.update({
+  id: '/api/tts',
+  path: '/api/tts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSttRoute = ApiSttRouteImport.update({
+  id: '/api/stt',
+  path: '/api/stt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiRefreshPromptsRoute = ApiRefreshPromptsRouteImport.update({
+  id: '/api/refresh-prompts',
+  path: '/api/refresh-prompts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiImprovePromptRoute = ApiImprovePromptRouteImport.update({
+  id: '/api/improve-prompt',
+  path: '/api/improve-prompt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateTextRoute = ApiGenerateTextRouteImport.update({
+  id: '/api/generate-text',
+  path: '/api/generate-text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateImageRoute = ApiGenerateImageRouteImport.update({
+  id: '/api/generate-image',
+  path: '/api/generate-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateCodeRoute = ApiGenerateCodeRouteImport.update({
+  id: '/api/generate-code',
+  path: '/api/generate-code',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/audio': typeof AudioRoute
+  '/code': typeof CodeRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
+  '/image': typeof ImageRoute
+  '/library': typeof LibraryRoute
+  '/projects': typeof ProjectsRoute
+  '/settings': typeof SettingsRoute
+  '/text': typeof TextRoute
+  '/api/generate-code': typeof ApiGenerateCodeRoute
+  '/api/generate-image': typeof ApiGenerateImageRoute
+  '/api/generate-text': typeof ApiGenerateTextRoute
+  '/api/improve-prompt': typeof ApiImprovePromptRoute
+  '/api/refresh-prompts': typeof ApiRefreshPromptsRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/audio': typeof AudioRoute
+  '/code': typeof CodeRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
+  '/image': typeof ImageRoute
+  '/library': typeof LibraryRoute
+  '/projects': typeof ProjectsRoute
+  '/settings': typeof SettingsRoute
+  '/text': typeof TextRoute
+  '/api/generate-code': typeof ApiGenerateCodeRoute
+  '/api/generate-image': typeof ApiGenerateImageRoute
+  '/api/generate-text': typeof ApiGenerateTextRoute
+  '/api/improve-prompt': typeof ApiImprovePromptRoute
+  '/api/refresh-prompts': typeof ApiRefreshPromptsRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/audio': typeof AudioRoute
+  '/code': typeof CodeRoute
+  '/help': typeof HelpRoute
+  '/history': typeof HistoryRoute
+  '/image': typeof ImageRoute
+  '/library': typeof LibraryRoute
+  '/projects': typeof ProjectsRoute
+  '/settings': typeof SettingsRoute
+  '/text': typeof TextRoute
+  '/api/generate-code': typeof ApiGenerateCodeRoute
+  '/api/generate-image': typeof ApiGenerateImageRoute
+  '/api/generate-text': typeof ApiGenerateTextRoute
+  '/api/improve-prompt': typeof ApiImprovePromptRoute
+  '/api/refresh-prompts': typeof ApiRefreshPromptsRoute
+  '/api/stt': typeof ApiSttRoute
+  '/api/tts': typeof ApiTtsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/audio'
+    | '/code'
+    | '/help'
+    | '/history'
+    | '/image'
+    | '/library'
+    | '/projects'
+    | '/settings'
+    | '/text'
+    | '/api/generate-code'
+    | '/api/generate-image'
+    | '/api/generate-text'
+    | '/api/improve-prompt'
+    | '/api/refresh-prompts'
+    | '/api/stt'
+    | '/api/tts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/audio'
+    | '/code'
+    | '/help'
+    | '/history'
+    | '/image'
+    | '/library'
+    | '/projects'
+    | '/settings'
+    | '/text'
+    | '/api/generate-code'
+    | '/api/generate-image'
+    | '/api/generate-text'
+    | '/api/improve-prompt'
+    | '/api/refresh-prompts'
+    | '/api/stt'
+    | '/api/tts'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/audio'
+    | '/code'
+    | '/help'
+    | '/history'
+    | '/image'
+    | '/library'
+    | '/projects'
+    | '/settings'
+    | '/text'
+    | '/api/generate-code'
+    | '/api/generate-image'
+    | '/api/generate-text'
+    | '/api/improve-prompt'
+    | '/api/refresh-prompts'
+    | '/api/stt'
+    | '/api/tts'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AudioRoute: typeof AudioRoute
+  CodeRoute: typeof CodeRoute
+  HelpRoute: typeof HelpRoute
+  HistoryRoute: typeof HistoryRoute
+  ImageRoute: typeof ImageRoute
+  LibraryRoute: typeof LibraryRoute
+  ProjectsRoute: typeof ProjectsRoute
+  SettingsRoute: typeof SettingsRoute
+  TextRoute: typeof TextRoute
+  ApiGenerateCodeRoute: typeof ApiGenerateCodeRoute
+  ApiGenerateImageRoute: typeof ApiGenerateImageRoute
+  ApiGenerateTextRoute: typeof ApiGenerateTextRoute
+  ApiImprovePromptRoute: typeof ApiImprovePromptRoute
+  ApiRefreshPromptsRoute: typeof ApiRefreshPromptsRoute
+  ApiSttRoute: typeof ApiSttRoute
+  ApiTtsRoute: typeof ApiTtsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/text': {
+      id: '/text'
+      path: '/text'
+      fullPath: '/text'
+      preLoaderRoute: typeof TextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/image': {
+      id: '/image'
+      path: '/image'
+      fullPath: '/image'
+      preLoaderRoute: typeof ImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/code': {
+      id: '/code'
+      path: '/code'
+      fullPath: '/code'
+      preLoaderRoute: typeof CodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audio': {
+      id: '/audio'
+      path: '/audio'
+      fullPath: '/audio'
+      preLoaderRoute: typeof AudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +343,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/tts': {
+      id: '/api/tts'
+      path: '/api/tts'
+      fullPath: '/api/tts'
+      preLoaderRoute: typeof ApiTtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stt': {
+      id: '/api/stt'
+      path: '/api/stt'
+      fullPath: '/api/stt'
+      preLoaderRoute: typeof ApiSttRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/refresh-prompts': {
+      id: '/api/refresh-prompts'
+      path: '/api/refresh-prompts'
+      fullPath: '/api/refresh-prompts'
+      preLoaderRoute: typeof ApiRefreshPromptsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/improve-prompt': {
+      id: '/api/improve-prompt'
+      path: '/api/improve-prompt'
+      fullPath: '/api/improve-prompt'
+      preLoaderRoute: typeof ApiImprovePromptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-text': {
+      id: '/api/generate-text'
+      path: '/api/generate-text'
+      fullPath: '/api/generate-text'
+      preLoaderRoute: typeof ApiGenerateTextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-image': {
+      id: '/api/generate-image'
+      path: '/api/generate-image'
+      fullPath: '/api/generate-image'
+      preLoaderRoute: typeof ApiGenerateImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-code': {
+      id: '/api/generate-code'
+      path: '/api/generate-code'
+      fullPath: '/api/generate-code'
+      preLoaderRoute: typeof ApiGenerateCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AudioRoute: AudioRoute,
+  CodeRoute: CodeRoute,
+  HelpRoute: HelpRoute,
+  HistoryRoute: HistoryRoute,
+  ImageRoute: ImageRoute,
+  LibraryRoute: LibraryRoute,
+  ProjectsRoute: ProjectsRoute,
+  SettingsRoute: SettingsRoute,
+  TextRoute: TextRoute,
+  ApiGenerateCodeRoute: ApiGenerateCodeRoute,
+  ApiGenerateImageRoute: ApiGenerateImageRoute,
+  ApiGenerateTextRoute: ApiGenerateTextRoute,
+  ApiImprovePromptRoute: ApiImprovePromptRoute,
+  ApiRefreshPromptsRoute: ApiRefreshPromptsRoute,
+  ApiSttRoute: ApiSttRoute,
+  ApiTtsRoute: ApiTtsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
