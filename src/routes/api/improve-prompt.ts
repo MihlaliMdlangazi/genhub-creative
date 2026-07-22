@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { callChat } from "./generate-text";
+import { callChat } from "@/lib/ai.server";
 
 export const Route = createFileRoute("/api/improve-prompt")({
   server: {

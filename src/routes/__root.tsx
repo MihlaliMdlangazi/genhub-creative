@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AppLayout } from "../components/app-layout";
+import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -77,20 +79,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "CreatorFlow AI — Create text, code, images, and audio in one workspace" },
+      {
+        name: "description",
+        content:
+          "CreatorFlow AI is a premium AI content studio for writers, developers, designers, and creators. Generate text, code, images, and audio in a single professional workspace.",
+      },
+      { name: "author", content: "CreatorFlow AI" },
+      { property: "og:title", content: "CreatorFlow AI — The AI-Powered Creator Studio" },
+      {
+        property: "og:description",
+        content:
+          "One professional workspace to write, code, design, and narrate with AI. No accounts required.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
       },
+      { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
@@ -119,8 +129,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <AppLayout>
+        <Outlet />
+      </AppLayout>
+      <Toaster />
     </QueryClientProvider>
   );
 }
