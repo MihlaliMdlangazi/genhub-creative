@@ -68,7 +68,6 @@ function ImagePage() {
   const [isFinal, setIsFinal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
-  const [elapsed, setElapsed] = useState(0);
   const [improving, setImproving] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [library, setLibrary] = useState<PromptTemplate[]>(() =>
@@ -78,7 +77,7 @@ function ImagePage() {
   // Cache: prompt -> final data URL. First run misses, subsequent identical prompts hit.
   const cacheRef = useRef<Map<string, string>>(new Map());
   const lastPromptRef = useRef<string>("");
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const statusTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const chars = prompt.length;
 
