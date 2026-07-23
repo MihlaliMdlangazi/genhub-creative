@@ -145,3 +145,7 @@
 @utility shadow-lift {
   box-shadow: var(--shadow-lift);
 }
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
