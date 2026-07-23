@@ -300,7 +300,7 @@ function ImagePage() {
                 <p className="text-sm font-medium">Output</p>
                 <p className="text-xs text-muted-foreground">
                   {loading
-                    ? `${status} • ${elapsed.toFixed(1)}s`
+                    ? status
                     : isFinal
                       ? "Generation complete"
                       : "Generated image appears below."}
