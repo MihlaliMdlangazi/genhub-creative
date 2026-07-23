@@ -339,7 +339,7 @@ function ImagePage() {
               {image ? (
                 <ImagePreview src={image} isFinal={isFinal} status={status} />
               ) : loading ? (
-                <ImageSkeleton status={status} elapsed={elapsed} />
+                <ImageSkeleton status={status} />
               ) : (
                 <EmptyOutput />
               )}
