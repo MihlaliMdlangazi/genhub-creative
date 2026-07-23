@@ -42,12 +42,25 @@ export const Route = createFileRoute("/image")({
   component: ImagePage,
 });
 
-const STATUS_STAGES = [
-  "Applying your prompt...",
-  "Generating image...",
-  "Rendering preview...",
-  "Rendering final image...",
+const STATUS_MESSAGES = [
+  "Generating your image...",
+  "Creating your artwork...",
+  "Rendering your design...",
+  "Applying AI enhancements...",
+  "Finalizing your image...",
+  "Composing the scene...",
+  "Polishing the details...",
 ];
+
+function pickStatus(prev?: string) {
+  let next = STATUS_MESSAGES[Math.floor(Math.random() * STATUS_MESSAGES.length)];
+  if (prev && STATUS_MESSAGES.length > 1) {
+    while (next === prev) {
+      next = STATUS_MESSAGES[Math.floor(Math.random() * STATUS_MESSAGES.length)];
+    }
+  }
+  return next;
+}
 
 function ImagePage() {
   const [prompt, setPrompt] = useState("");
