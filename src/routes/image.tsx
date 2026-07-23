@@ -451,7 +451,7 @@ function ImagePreview({
   );
 }
 
-function ImageSkeleton({ status, elapsed }: { status: string; elapsed: number }) {
+function ImageSkeleton({ status }: { status: string }) {
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="relative aspect-square w-full max-w-[512px] overflow-hidden rounded-xl border bg-muted">
@@ -461,8 +461,9 @@ function ImageSkeleton({ status, elapsed }: { status: string; elapsed: number })
           <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand shadow-lift">
             <Sparkles className="h-6 w-6 text-white" />
           </div>
-          <p className="text-sm font-medium">{status || "Generating image..."}</p>
-          <p className="text-xs text-muted-foreground">{elapsed.toFixed(1)}s elapsed</p>
+          <p className="text-sm font-medium transition-opacity duration-300">
+            {status || "Generating your image..."}
+          </p>
         </div>
       </div>
     </div>
