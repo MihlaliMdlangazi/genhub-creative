@@ -83,7 +83,7 @@ function ImagePage() {
 
   useEffect(() => {
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (statusTimerRef.current) clearInterval(statusTimerRef.current);
     };
   }, []);
 
@@ -98,7 +98,7 @@ function ImagePage() {
       if (cached) {
         setImage(cached);
         setIsFinal(true);
-        setStatus("Loaded from cache");
+        setStatus("");
         lastPromptRef.current = cacheKey;
         toast.success("Loaded from cache");
         return;
@@ -108,13 +108,13 @@ function ImagePage() {
     setLoading(true);
     setImage("");
     setIsFinal(false);
-    setStatus(STATUS_STAGES[0]);
-    setElapsed(0);
-    const start = performance.now();
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setElapsed((performance.now() - start) / 1000);
-    }, 100);
+    let currentStatus = pickStatus();
+    setStatus(currentStatus);
+    if (statusTimerRef.current) clearInterval(statusTimerRef.current);
+    statusTimerRef.current = setInterval(() => {
+      currentStatus = pickStatus(currentStatus);
+      setStatus(currentStatus);
+    }, 1800);
 
     try {
       const finalUrl = await streamImage(
@@ -123,7 +123,6 @@ function ImagePage() {
           setImage(dataUrl);
           setIsFinal(final);
         },
-        (s) => setStatus(s),
       );
       cacheRef.current.set(cacheKey, finalUrl);
       lastPromptRef.current = cacheKey;
@@ -132,8 +131,8 @@ function ImagePage() {
       toast.error((e as Error).message || "Generation failed");
       setStatus("");
     } finally {
-      if (timerRef.current) clearInterval(timerRef.current);
-      timerRef.current = null;
+      if (statusTimerRef.current) clearInterval(statusTimerRef.current);
+      statusTimerRef.current = null;
       setLoading(false);
     }
   }
