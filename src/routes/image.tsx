@@ -42,12 +42,25 @@ export const Route = createFileRoute("/image")({
   component: ImagePage,
 });
 
-const STATUS_STAGES = [
-  "Applying your prompt...",
-  "Generating image...",
-  "Rendering preview...",
-  "Rendering final image...",
+const STATUS_MESSAGES = [
+  "Generating your image...",
+  "Creating your artwork...",
+  "Rendering your design...",
+  "Applying AI enhancements...",
+  "Finalizing your image...",
+  "Composing the scene...",
+  "Polishing the details...",
 ];
+
+function pickStatus(prev?: string) {
+  let next = STATUS_MESSAGES[Math.floor(Math.random() * STATUS_MESSAGES.length)];
+  if (prev && STATUS_MESSAGES.length > 1) {
+    while (next === prev) {
+      next = STATUS_MESSAGES[Math.floor(Math.random() * STATUS_MESSAGES.length)];
+    }
+  }
+  return next;
+}
 
 function ImagePage() {
   const [prompt, setPrompt] = useState("");
@@ -55,7 +68,6 @@ function ImagePage() {
   const [isFinal, setIsFinal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
-  const [elapsed, setElapsed] = useState(0);
   const [improving, setImproving] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [library, setLibrary] = useState<PromptTemplate[]>(() =>
@@ -65,13 +77,13 @@ function ImagePage() {
   // Cache: prompt -> final data URL. First run misses, subsequent identical prompts hit.
   const cacheRef = useRef<Map<string, string>>(new Map());
   const lastPromptRef = useRef<string>("");
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const statusTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const chars = prompt.length;
 
   useEffect(() => {
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (statusTimerRef.current) clearInterval(statusTimerRef.current);
     };
   }, []);
 
@@ -86,7 +98,7 @@ function ImagePage() {
       if (cached) {
         setImage(cached);
         setIsFinal(true);
-        setStatus("Loaded from cache");
+        setStatus("");
         lastPromptRef.current = cacheKey;
         toast.success("Loaded from cache");
         return;
@@ -96,13 +108,13 @@ function ImagePage() {
     setLoading(true);
     setImage("");
     setIsFinal(false);
-    setStatus(STATUS_STAGES[0]);
-    setElapsed(0);
-    const start = performance.now();
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setElapsed((performance.now() - start) / 1000);
-    }, 100);
+    let currentStatus = pickStatus();
+    setStatus(currentStatus);
+    if (statusTimerRef.current) clearInterval(statusTimerRef.current);
+    statusTimerRef.current = setInterval(() => {
+      currentStatus = pickStatus(currentStatus);
+      setStatus(currentStatus);
+    }, 1800);
 
     try {
       const finalUrl = await streamImage(
@@ -111,7 +123,6 @@ function ImagePage() {
           setImage(dataUrl);
           setIsFinal(final);
         },
-        (s) => setStatus(s),
       );
       cacheRef.current.set(cacheKey, finalUrl);
       lastPromptRef.current = cacheKey;
@@ -120,8 +131,8 @@ function ImagePage() {
       toast.error((e as Error).message || "Generation failed");
       setStatus("");
     } finally {
-      if (timerRef.current) clearInterval(timerRef.current);
-      timerRef.current = null;
+      if (statusTimerRef.current) clearInterval(statusTimerRef.current);
+      statusTimerRef.current = null;
       setLoading(false);
     }
   }
@@ -289,7 +300,7 @@ function ImagePage() {
                 <p className="text-sm font-medium">Output</p>
                 <p className="text-xs text-muted-foreground">
                   {loading
-                    ? `${status} • ${elapsed.toFixed(1)}s`
+                    ? status
                     : isFinal
                       ? "Generation complete"
                       : "Generated image appears below."}
@@ -328,7 +339,7 @@ function ImagePage() {
               {image ? (
                 <ImagePreview src={image} isFinal={isFinal} status={status} />
               ) : loading ? (
-                <ImageSkeleton status={status} elapsed={elapsed} />
+                <ImageSkeleton status={status} />
               ) : (
                 <EmptyOutput />
               )}
@@ -440,7 +451,7 @@ function ImagePreview({
   );
 }
 
-function ImageSkeleton({ status, elapsed }: { status: string; elapsed: number }) {
+function ImageSkeleton({ status }: { status: string }) {
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="relative aspect-square w-full max-w-[512px] overflow-hidden rounded-xl border bg-muted">
@@ -450,8 +461,9 @@ function ImageSkeleton({ status, elapsed }: { status: string; elapsed: number })
           <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand shadow-lift">
             <Sparkles className="h-6 w-6 text-white" />
           </div>
-          <p className="text-sm font-medium">{status || "Generating image..."}</p>
-          <p className="text-xs text-muted-foreground">{elapsed.toFixed(1)}s elapsed</p>
+          <p className="text-sm font-medium transition-opacity duration-300">
+            {status || "Generating your image..."}
+          </p>
         </div>
       </div>
     </div>
