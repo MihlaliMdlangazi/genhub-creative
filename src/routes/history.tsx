@@ -138,3 +138,7 @@ function KindIcon({ kind }: { kind: GeneratorKind }) {
     kind === "text" ? Type : kind === "code" ? Code2 : kind === "image" ? ImageIcon : AudioLines;
   return <Icon className="h-3.5 w-3.5 text-primary" />;
 }
+
+function labelFor(kind: GeneratorKind) {
+  return { text: "Text", code: "Code", image: "Image", audio: "Audio" }[kind];
+}
