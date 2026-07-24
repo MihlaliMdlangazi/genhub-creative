@@ -260,9 +260,20 @@ export function PromptWorkspace({
                 <Button size="sm" variant="ghost" onClick={download} disabled={!output}>
                   <Download className="mr-1.5 h-4 w-4" /> Download
                 </Button>
-                <Button size="sm" variant="outline" onClick={saveToProject} disabled={!output}>
-                  <Save className="mr-1.5 h-4 w-4" /> Save to Project
-                </Button>
+                <SaveToProjectButton
+                  kind={kind}
+                  generator={`${kindLabel} Generator`}
+                  prompt={prompt}
+                  output={output}
+                  meta={meta}
+                  disabled={!output}
+                />
+                <ShareButton
+                  kind={kind}
+                  prompt={prompt}
+                  output={output}
+                  disabled={!output}
+                />
               </div>
             </div>
             <div className="p-4 min-h-56">
@@ -274,23 +285,6 @@ export function PromptWorkspace({
                 <EmptyOutput kind={kind} />
               )}
             </div>
-            {output && (
-              <div className="flex flex-wrap items-center gap-2 border-t p-3">
-                <span className="text-xs text-muted-foreground">Share</span>
-                <Button size="sm" variant="ghost" onClick={shareLinkedIn}>
-                  <Linkedin className="mr-1.5 h-4 w-4" /> LinkedIn
-                </Button>
-                {kind === "code" && (
-                  <Button size="sm" variant="ghost" onClick={pushToGitHub}>
-                    <Github className="mr-1.5 h-4 w-4" /> Publish to GitHub
-                  </Button>
-                )}
-                <span className="ml-auto text-xs text-muted-foreground">
-                  <Share2 className="mr-1 inline h-3.5 w-3.5" />
-                  Shared with your workspace only.
-                </span>
-              </div>
-            )}
           </Card>
         </div>
 
