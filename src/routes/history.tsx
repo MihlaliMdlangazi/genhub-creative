@@ -25,19 +25,12 @@ export const Route = createFileRoute("/history")({
 
 function HistoryPage() {
   const list = useStore(() => history.list());
-  const projectList = useStore(() => projects.list());
 
   function reuse(prompt: string) {
     navigator.clipboard.writeText(prompt);
     toast.success("Prompt copied — paste it into any generator.");
   }
 
-  function saveTo(id: string, entryId: string) {
-    const entry = history.list().find((h) => h.id === entryId);
-    if (!entry) return;
-    projects.addItem(id, entry);
-    toast.success("Saved to project");
-  }
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-6 md:px-8 md:py-10">
