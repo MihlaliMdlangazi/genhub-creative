@@ -302,14 +302,19 @@ function ImagePage() {
                 >
                   <Download className="mr-1.5 h-4 w-4" /> Download
                 </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={saveToProject}
+                <SaveToProjectButton
+                  kind="image"
+                  generator="Image Generator"
+                  prompt={prompt}
+                  output={isFinal ? image : ""}
                   disabled={!image || !isFinal}
-                >
-                  <Save className="mr-1.5 h-4 w-4" /> Save to Project
-                </Button>
+                />
+                <ShareButton
+                  kind="image"
+                  prompt={prompt}
+                  output={isFinal ? image : ""}
+                  disabled={!image || !isFinal}
+                />
               </div>
             </div>
             <div className="min-h-56 p-4">
@@ -321,18 +326,6 @@ function ImagePage() {
                 <EmptyOutput />
               )}
             </div>
-            {image && isFinal && (
-              <div className="flex flex-wrap items-center gap-2 border-t p-3">
-                <span className="text-xs text-muted-foreground">Share</span>
-                <Button size="sm" variant="ghost" onClick={shareLinkedIn}>
-                  <Linkedin className="mr-1.5 h-4 w-4" /> LinkedIn
-                </Button>
-                <span className="ml-auto text-xs text-muted-foreground">
-                  <Share2 className="mr-1 inline h-3.5 w-3.5" />
-                  Shared with your workspace only.
-                </span>
-              </div>
-            )}
           </Card>
         </div>
 
