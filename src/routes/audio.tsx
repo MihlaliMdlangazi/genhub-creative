@@ -10,7 +10,6 @@ import {
   StopCircle,
   RotateCcw,
   Download,
-  Save,
   Sparkles,
   Loader2,
   Copy,
@@ -27,6 +26,8 @@ import { Label } from "@/components/ui/label";
 import { seedPrompts, sample, type PromptTemplate } from "@/lib/prompts";
 import { history, projects, useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { ShareButton } from "@/components/share-dialog";
 
 export const Route = createFileRoute("/audio")({
   head: () => ({
