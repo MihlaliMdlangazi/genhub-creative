@@ -128,31 +128,6 @@ export function PromptWorkspace({
     toast.success("Output copied");
   }
 
-  function saveToProject() {
-    if (!output) return;
-    const list = projects.list();
-    let target = list[0];
-    if (!target) target = projects.create("My First Project");
-    projects.addItem(target.id, {
-      id: Math.random().toString(36).slice(2),
-      kind,
-      prompt,
-      output,
-      meta,
-      createdAt: Date.now(),
-    });
-    toast.success(`Saved to "${target.name}"`);
-  }
-
-  function shareLinkedIn() {
-    const url = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(window.location.origin);
-    window.open(url, "_blank");
-  }
-
-  function pushToGitHub() {
-    window.open("https://github.com/new", "_blank");
-    toast.info("Opening GitHub — paste your generated code into a new repo.");
-  }
 
   function download() {
     if (!output) return;
