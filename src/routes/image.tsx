@@ -7,9 +7,6 @@ import {
   Sparkles,
   Play,
   RefreshCw,
-  Save,
-  Share2,
-  Linkedin,
   Download,
   Loader2,
   RotateCw,
@@ -22,6 +19,8 @@ import { seedPrompts, sample, type PromptTemplate } from "@/lib/prompts";
 import { history, projects, useStore } from "@/lib/store";
 import { streamImage } from "@/lib/stream-image";
 import { cn } from "@/lib/utils";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { ShareButton } from "@/components/share-dialog";
 
 export const Route = createFileRoute("/image")({
   head: () => ({
