@@ -196,19 +196,6 @@ function ImagePage() {
     URL.revokeObjectURL(url);
   }
 
-  function download() {
-    if (!image || !isFinal) return;
-    const b64 = image.split(",")[1];
-    const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
-    const blob = new Blob([bytes], { type: "image/png" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "creatorflow.png";
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
   function generateAgain() {
     // Same prompt, force a fresh generation (bypass cache) for a new variation.
     const p = lastPromptRef.current || prompt;
