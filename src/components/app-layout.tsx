@@ -8,6 +8,7 @@ import {
   FolderKanban,
   BookMarked,
   History,
+  Share2,
   Settings as SettingsIcon,
   Search,
   Info,
@@ -30,6 +31,7 @@ const NAV = [
   { to: "/projects", label: "Projects", icon: FolderKanban },
   { to: "/library", label: "Prompt Library", icon: BookMarked },
   { to: "/history", label: "History", icon: History },
+  { to: "/social", label: "Social Publishing", icon: Share2 },
   { to: "/settings", label: "Settings", icon: SettingsIcon },
 ] as const;
 
