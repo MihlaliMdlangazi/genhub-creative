@@ -138,31 +138,26 @@ async function nativeShare(kind: GeneratorKind, text: string, output: string) {
     if (kind === "image" && output.startsWith("data:image")) {
       const blob = await (await fetch(output)).blob();
       const file = new File([blob], "creatorflow.png", { type: blob.type });
-      // @ts-expect-error canShare files exists in modern browsers
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await (navigator as unknown as { share: (d: ShareData) => Promise<void> }).share({
-          files: [file],
-          text,
-        } as ShareData);
+      const nav = navigator as Navigator & {
+        canShare?: (d: { files?: File[] }) => boolean;
+      };
+      if (nav.canShare && nav.canShare({ files: [file] })) {
+        await nav.share({ files: [file], text } as ShareData);
         return true;
       }
     }
     if (kind === "audio" && output.startsWith("data:audio")) {
       const blob = await (await fetch(output)).blob();
       const file = new File([blob], "creatorflow.mp3", { type: blob.type });
-      // @ts-expect-error canShare files exists
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await (navigator as unknown as { share: (d: ShareData) => Promise<void> }).share({
-          files: [file],
-          text,
-        });
+      const nav = navigator as Navigator & {
+        canShare?: (d: { files?: File[] }) => boolean;
+      };
+      if (nav.canShare && nav.canShare({ files: [file] })) {
+        await nav.share({ files: [file], text } as ShareData);
         return true;
       }
     }
-    await (navigator as unknown as { share: (d: ShareData) => Promise<void> }).share({
-      text,
-      url: window.location.origin,
-    });
+    await navigator.share({ text, url: window.location.origin });
     return true;
   } catch {
     return false;
