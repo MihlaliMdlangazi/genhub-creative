@@ -173,6 +173,12 @@ CreatorFlow AI is actively being developed with additional AI integrations, perf
 - Additional AI integrations
 
 ---
+## 📖 Documentation
+
+Detailed project documentation is available in the **docs** folder.
+
+➡️ **Read the full documentation here:** [CreatorFlow AI Documentation](docs/README.md)
+
 
 ## Author
 
