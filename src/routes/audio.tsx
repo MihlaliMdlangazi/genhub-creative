@@ -366,9 +366,20 @@ function AudioPage() {
                 <Button size="sm" variant="ghost" onClick={download} disabled={!audioUrl}>
                   <Download className="mr-1.5 h-4 w-4" /> Download
                 </Button>
-                <Button size="sm" variant="outline" onClick={saveToProject} disabled={!audioDataUrl}>
-                  <Save className="mr-1.5 h-4 w-4" /> Save to Project
-                </Button>
+                <SaveToProjectButton
+                  kind="audio"
+                  generator="Audio Generator"
+                  prompt={prompt}
+                  output={audioDataUrl ?? ""}
+                  meta={{ voice }}
+                  disabled={!audioDataUrl}
+                />
+                <ShareButton
+                  kind="audio"
+                  prompt={prompt}
+                  output={audioDataUrl ?? ""}
+                  disabled={!audioDataUrl}
+                />
               </div>
             </div>
             <div className="p-5">
