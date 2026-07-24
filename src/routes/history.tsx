@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { Trash2, Copy, RotateCcw, Save, Type, Code2, ImageIcon, AudioLines } from "lucide-react";
+import { Trash2, Copy, RotateCcw, Type, Code2, ImageIcon, AudioLines } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { history, projects, useStore, type GeneratorKind } from "@/lib/store";
+import { history, useStore, type GeneratorKind } from "@/lib/store";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { ShareButton } from "@/components/share-dialog";
 
 export const Route = createFileRoute("/history")({
   head: () => ({
