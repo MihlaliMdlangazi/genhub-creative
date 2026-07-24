@@ -92,15 +92,20 @@ function HistoryPage() {
                   >
                     <Copy className="mr-1.5 h-4 w-4" /> Copy
                   </Button>
-                  {projectList.length > 0 && (
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => saveTo(projectList[0].id, h.id)}
-                    >
-                      <Save className="mr-1.5 h-4 w-4" /> Save
-                    </Button>
-                  )}
+                  <SaveToProjectButton
+                    kind={h.kind}
+                    generator={`${labelFor(h.kind)} Generator`}
+                    prompt={h.prompt}
+                    output={h.output}
+                    meta={h.meta}
+                    variant="ghost"
+                  />
+                  <ShareButton
+                    kind={h.kind}
+                    prompt={h.prompt}
+                    output={h.output}
+                    variant="ghost"
+                  />
                   <Button
                     size="sm"
                     variant="ghost"
