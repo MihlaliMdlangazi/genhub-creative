@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TextRouteImport } from './routes/text'
+import { Route as SocialRouteImport } from './routes/social'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as LibraryRouteImport } from './routes/library'
@@ -31,6 +32,11 @@ import { Route as ApiGenerateCodeRouteImport } from './routes/api/generate-code'
 const TextRoute = TextRouteImport.update({
   id: '/text',
   path: '/text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SocialRoute = SocialRouteImport.update({
+  id: '/social',
+  path: '/social',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsRoute = SettingsRouteImport.update({
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/library': typeof LibraryRoute
   '/projects': typeof ProjectsRoute
   '/settings': typeof SettingsRoute
+  '/social': typeof SocialRoute
   '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
@@ -150,6 +157,7 @@ export interface FileRoutesByTo {
   '/library': typeof LibraryRoute
   '/projects': typeof ProjectsRoute
   '/settings': typeof SettingsRoute
+  '/social': typeof SocialRoute
   '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   '/library': typeof LibraryRoute
   '/projects': typeof ProjectsRoute
   '/settings': typeof SettingsRoute
+  '/social': typeof SocialRoute
   '/text': typeof TextRoute
   '/api/generate-code': typeof ApiGenerateCodeRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
@@ -193,6 +202,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/projects'
     | '/settings'
+    | '/social'
     | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/projects'
     | '/settings'
+    | '/social'
     | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/library'
     | '/projects'
     | '/settings'
+    | '/social'
     | '/text'
     | '/api/generate-code'
     | '/api/generate-image'
@@ -254,6 +266,7 @@ export interface RootRouteChildren {
   LibraryRoute: typeof LibraryRoute
   ProjectsRoute: typeof ProjectsRoute
   SettingsRoute: typeof SettingsRoute
+  SocialRoute: typeof SocialRoute
   TextRoute: typeof TextRoute
   ApiGenerateCodeRoute: typeof ApiGenerateCodeRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
@@ -271,6 +284,13 @@ declare module '@tanstack/react-router' {
       path: '/text'
       fullPath: '/text'
       preLoaderRoute: typeof TextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/social': {
+      id: '/social'
+      path: '/social'
+      fullPath: '/social'
+      preLoaderRoute: typeof SocialRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings': {
@@ -406,6 +426,7 @@ const rootRouteChildren: RootRouteChildren = {
   LibraryRoute: LibraryRoute,
   ProjectsRoute: ProjectsRoute,
   SettingsRoute: SettingsRoute,
+  SocialRoute: SocialRoute,
   TextRoute: TextRoute,
   ApiGenerateCodeRoute: ApiGenerateCodeRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,

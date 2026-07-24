@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { Trash2, Copy, RotateCcw, Save, Type, Code2, ImageIcon, AudioLines } from "lucide-react";
+import { Trash2, Copy, RotateCcw, Type, Code2, ImageIcon, AudioLines } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { history, projects, useStore, type GeneratorKind } from "@/lib/store";
+import { history, useStore, type GeneratorKind } from "@/lib/store";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { ShareButton } from "@/components/share-dialog";
 
 export const Route = createFileRoute("/history")({
   head: () => ({
@@ -23,19 +25,12 @@ export const Route = createFileRoute("/history")({
 
 function HistoryPage() {
   const list = useStore(() => history.list());
-  const projectList = useStore(() => projects.list());
 
   function reuse(prompt: string) {
     navigator.clipboard.writeText(prompt);
     toast.success("Prompt copied — paste it into any generator.");
   }
 
-  function saveTo(id: string, entryId: string) {
-    const entry = history.list().find((h) => h.id === entryId);
-    if (!entry) return;
-    projects.addItem(id, entry);
-    toast.success("Saved to project");
-  }
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-6 md:px-8 md:py-10">
@@ -97,15 +92,20 @@ function HistoryPage() {
                   >
                     <Copy className="mr-1.5 h-4 w-4" /> Copy
                   </Button>
-                  {projectList.length > 0 && (
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => saveTo(projectList[0].id, h.id)}
-                    >
-                      <Save className="mr-1.5 h-4 w-4" /> Save
-                    </Button>
-                  )}
+                  <SaveToProjectButton
+                    kind={h.kind}
+                    generator={`${labelFor(h.kind)} Generator`}
+                    prompt={h.prompt}
+                    output={h.output}
+                    meta={h.meta}
+                    variant="ghost"
+                  />
+                  <ShareButton
+                    kind={h.kind}
+                    prompt={h.prompt}
+                    output={h.output}
+                    variant="ghost"
+                  />
                   <Button
                     size="sm"
                     variant="ghost"
@@ -137,4 +137,8 @@ function KindIcon({ kind }: { kind: GeneratorKind }) {
   const Icon =
     kind === "text" ? Type : kind === "code" ? Code2 : kind === "image" ? ImageIcon : AudioLines;
   return <Icon className="h-3.5 w-3.5 text-primary" />;
+}
+
+function labelFor(kind: GeneratorKind) {
+  return { text: "Text", code: "Code", image: "Image", audio: "Audio" }[kind];
 }

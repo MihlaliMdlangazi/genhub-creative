@@ -10,7 +10,6 @@ import {
   StopCircle,
   RotateCcw,
   Download,
-  Save,
   Sparkles,
   Loader2,
   Copy,
@@ -27,6 +26,8 @@ import { Label } from "@/components/ui/label";
 import { seedPrompts, sample, type PromptTemplate } from "@/lib/prompts";
 import { history, projects, useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { ShareButton } from "@/components/share-dialog";
 
 export const Route = createFileRoute("/audio")({
   head: () => ({
@@ -229,21 +230,6 @@ function AudioPage() {
     a.click();
   }
 
-  function saveToProject() {
-    if (!audioDataUrl) return;
-    const list = projects.list();
-    let target = list[0];
-    if (!target) target = projects.create("My First Project");
-    projects.addItem(target.id, {
-      id: Math.random().toString(36).slice(2),
-      kind: "audio",
-      prompt,
-      output: audioDataUrl,
-      meta: { voice },
-      createdAt: Date.now(),
-    });
-    toast.success(`Saved to "${target.name}"`);
-  }
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-6 md:px-8 md:py-10">
@@ -365,9 +351,20 @@ function AudioPage() {
                 <Button size="sm" variant="ghost" onClick={download} disabled={!audioUrl}>
                   <Download className="mr-1.5 h-4 w-4" /> Download
                 </Button>
-                <Button size="sm" variant="outline" onClick={saveToProject} disabled={!audioDataUrl}>
-                  <Save className="mr-1.5 h-4 w-4" /> Save to Project
-                </Button>
+                <SaveToProjectButton
+                  kind="audio"
+                  generator="Audio Generator"
+                  prompt={prompt}
+                  output={audioDataUrl ?? ""}
+                  meta={{ voice }}
+                  disabled={!audioDataUrl}
+                />
+                <ShareButton
+                  kind="audio"
+                  prompt={prompt}
+                  output={audioDataUrl ?? ""}
+                  disabled={!audioDataUrl}
+                />
               </div>
             </div>
             <div className="p-5">

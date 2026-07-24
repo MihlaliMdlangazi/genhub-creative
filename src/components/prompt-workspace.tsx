@@ -6,10 +6,6 @@ import {
   Sparkles,
   Play,
   RefreshCw,
-  Save,
-  Share2,
-  Github,
-  Linkedin,
   Download,
   Loader2,
 } from "lucide-react";
@@ -20,6 +16,8 @@ import { Badge } from "@/components/ui/badge";
 import { seedPrompts, sample, type PromptTemplate } from "@/lib/prompts";
 import { history, projects, useStore, type GeneratorKind } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { ShareButton } from "@/components/share-dialog";
 
 interface Props {
   kind: GeneratorKind;
@@ -130,31 +128,6 @@ export function PromptWorkspace({
     toast.success("Output copied");
   }
 
-  function saveToProject() {
-    if (!output) return;
-    const list = projects.list();
-    let target = list[0];
-    if (!target) target = projects.create("My First Project");
-    projects.addItem(target.id, {
-      id: Math.random().toString(36).slice(2),
-      kind,
-      prompt,
-      output,
-      meta,
-      createdAt: Date.now(),
-    });
-    toast.success(`Saved to "${target.name}"`);
-  }
-
-  function shareLinkedIn() {
-    const url = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(window.location.origin);
-    window.open(url, "_blank");
-  }
-
-  function pushToGitHub() {
-    window.open("https://github.com/new", "_blank");
-    toast.info("Opening GitHub — paste your generated code into a new repo.");
-  }
 
   function download() {
     if (!output) return;
@@ -262,9 +235,20 @@ export function PromptWorkspace({
                 <Button size="sm" variant="ghost" onClick={download} disabled={!output}>
                   <Download className="mr-1.5 h-4 w-4" /> Download
                 </Button>
-                <Button size="sm" variant="outline" onClick={saveToProject} disabled={!output}>
-                  <Save className="mr-1.5 h-4 w-4" /> Save to Project
-                </Button>
+                <SaveToProjectButton
+                  kind={kind}
+                  generator={`${kindLabel} Generator`}
+                  prompt={prompt}
+                  output={output}
+                  meta={meta}
+                  disabled={!output}
+                />
+                <ShareButton
+                  kind={kind}
+                  prompt={prompt}
+                  output={output}
+                  disabled={!output}
+                />
               </div>
             </div>
             <div className="p-4 min-h-56">
@@ -276,23 +260,6 @@ export function PromptWorkspace({
                 <EmptyOutput kind={kind} />
               )}
             </div>
-            {output && (
-              <div className="flex flex-wrap items-center gap-2 border-t p-3">
-                <span className="text-xs text-muted-foreground">Share</span>
-                <Button size="sm" variant="ghost" onClick={shareLinkedIn}>
-                  <Linkedin className="mr-1.5 h-4 w-4" /> LinkedIn
-                </Button>
-                {kind === "code" && (
-                  <Button size="sm" variant="ghost" onClick={pushToGitHub}>
-                    <Github className="mr-1.5 h-4 w-4" /> Publish to GitHub
-                  </Button>
-                )}
-                <span className="ml-auto text-xs text-muted-foreground">
-                  <Share2 className="mr-1 inline h-3.5 w-3.5" />
-                  Shared with your workspace only.
-                </span>
-              </div>
-            )}
           </Card>
         </div>
 

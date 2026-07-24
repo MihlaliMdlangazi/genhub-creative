@@ -7,9 +7,6 @@ import {
   Sparkles,
   Play,
   RefreshCw,
-  Save,
-  Share2,
-  Linkedin,
   Download,
   Loader2,
   RotateCw,
@@ -22,6 +19,8 @@ import { seedPrompts, sample, type PromptTemplate } from "@/lib/prompts";
 import { history, projects, useStore } from "@/lib/store";
 import { streamImage } from "@/lib/stream-image";
 import { cn } from "@/lib/utils";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { ShareButton } from "@/components/share-dialog";
 
 export const Route = createFileRoute("/image")({
   head: () => ({
@@ -184,28 +183,6 @@ function ImagePage() {
     toast.success("Prompt copied");
   }
 
-  function saveToProject() {
-    if (!image || !isFinal) return;
-    const list = projects.list();
-    let target = list[0];
-    if (!target) target = projects.create("My First Project");
-    projects.addItem(target.id, {
-      id: Math.random().toString(36).slice(2),
-      kind: "image",
-      prompt,
-      output: image,
-      createdAt: Date.now(),
-    });
-    toast.success(`Saved to "${target.name}"`);
-  }
-
-  function shareLinkedIn() {
-    const url =
-      "https://www.linkedin.com/sharing/share-offsite/?url=" +
-      encodeURIComponent(window.location.origin);
-    window.open(url, "_blank");
-  }
-
   function download() {
     if (!image || !isFinal) return;
     const b64 = image.split(",")[1];
@@ -325,14 +302,19 @@ function ImagePage() {
                 >
                   <Download className="mr-1.5 h-4 w-4" /> Download
                 </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={saveToProject}
+                <SaveToProjectButton
+                  kind="image"
+                  generator="Image Generator"
+                  prompt={prompt}
+                  output={isFinal ? image : ""}
                   disabled={!image || !isFinal}
-                >
-                  <Save className="mr-1.5 h-4 w-4" /> Save to Project
-                </Button>
+                />
+                <ShareButton
+                  kind="image"
+                  prompt={prompt}
+                  output={isFinal ? image : ""}
+                  disabled={!image || !isFinal}
+                />
               </div>
             </div>
             <div className="min-h-56 p-4">
@@ -344,18 +326,6 @@ function ImagePage() {
                 <EmptyOutput />
               )}
             </div>
-            {image && isFinal && (
-              <div className="flex flex-wrap items-center gap-2 border-t p-3">
-                <span className="text-xs text-muted-foreground">Share</span>
-                <Button size="sm" variant="ghost" onClick={shareLinkedIn}>
-                  <Linkedin className="mr-1.5 h-4 w-4" /> LinkedIn
-                </Button>
-                <span className="ml-auto text-xs text-muted-foreground">
-                  <Share2 className="mr-1 inline h-3.5 w-3.5" />
-                  Shared with your workspace only.
-                </span>
-              </div>
-            )}
           </Card>
         </div>
 

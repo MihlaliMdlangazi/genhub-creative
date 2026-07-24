@@ -10,6 +10,8 @@ export interface HistoryEntry {
   output: string; // text/code = raw, image = data URL, audio = data URL
   meta?: Record<string, string>;
   createdAt: number;
+  updatedAt?: number;
+  generator?: string;
 }
 
 export interface Project {
@@ -25,6 +27,7 @@ export interface Settings {
   theme: "light" | "dark";
   defaultVoice: string;
   defaultLanguage: string;
+  selectedProjectId?: string;
 }
 
 const K_HISTORY = "cf.history.v1";
