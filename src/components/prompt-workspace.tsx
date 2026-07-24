@@ -6,10 +6,6 @@ import {
   Sparkles,
   Play,
   RefreshCw,
-  Save,
-  Share2,
-  Github,
-  Linkedin,
   Download,
   Loader2,
 } from "lucide-react";
@@ -20,6 +16,8 @@ import { Badge } from "@/components/ui/badge";
 import { seedPrompts, sample, type PromptTemplate } from "@/lib/prompts";
 import { history, projects, useStore, type GeneratorKind } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { ShareButton } from "@/components/share-dialog";
 
 interface Props {
   kind: GeneratorKind;
