@@ -237,7 +237,6 @@ export function ShareButton({
         openWindow(`https://bsky.app/intent/compose?text=${enc}`);
         return;
       case "medium":
-      case "tumblr":
       case "instagram":
       case "threads":
       case "tiktok":
