@@ -230,21 +230,6 @@ function AudioPage() {
     a.click();
   }
 
-  function saveToProject() {
-    if (!audioDataUrl) return;
-    const list = projects.list();
-    let target = list[0];
-    if (!target) target = projects.create("My First Project");
-    projects.addItem(target.id, {
-      id: Math.random().toString(36).slice(2),
-      kind: "audio",
-      prompt,
-      output: audioDataUrl,
-      meta: { voice },
-      createdAt: Date.now(),
-    });
-    toast.success(`Saved to "${target.name}"`);
-  }
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-6 md:px-8 md:py-10">
